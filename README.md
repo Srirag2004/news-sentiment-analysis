@@ -92,7 +92,7 @@ This project is a web-based application that extracts news articles related to a
 - APIs can be accessed via Postman or any REST client.
 - Example request using `curl`:
   ```bash
-  curl -X POST "http://localhost:5000/fetch_news" -d '{"company": "Tesla"}' -H "Content-Type: application/json"
+  curl -X POST "http:127.0.0.1:8026/news" -d '{"company": "Tesla"}' -H "Content-Type: application/json"
   ```
 
 ## Model Details
