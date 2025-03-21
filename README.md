@@ -50,7 +50,7 @@ This project is a web-based application that extracts news articles related to a
 - Re (Regular Expressions)
 
 ### **Deployment & Hosting**
-- Hosted on Hugging Face Spaces: [News Sentiment Analysis](https://huggingface.co/spaces/srirag12/news-sentiment-analysis)
+- Hosted on Hugging Face Spaces: [News Sentiment Analysis](https://srirag12-news-sentiment-analysis.hf.space/)
 - Local development supported
 
 ### **Caching**
