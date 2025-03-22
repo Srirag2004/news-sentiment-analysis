@@ -1,99 +1,82 @@
-# News Sentiment Analysis and stock recommendation application
+# Automated Company News Sentiment & Stock Prediction Application
 
-## Overview
-This project is a web-based application that extracts news articles related to a given company, performs sentiment analysis, and provides a summarized report. Additionally, it includes a text-to-speech (TTS) feature to convert the summaries into Hindi speech and also provides stock recommendations for traders.
+## 1. Introduction & Problem Statement
+In an era where financial markets are heavily influenced by real-time news, staying updated with company-related articles is crucial. However, manually scanning multiple news sources and analyzing sentiment trends is inefficient. This project automates the process by fetching company-specific news, summarizing key insights, conducting sentiment analysis, and predicting stock trends based on the overall sentiment. The application also offers text-to-speech (TTS) functionality in Hindi for enhanced accessibility.
 
-## Features
-- **News Extraction:** Retrieves news articles based on the company name provided by the user.
-- **Sentiment Analysis:** Categorizes articles into positive, negative, or neutral sentiment.
-- **Summarization:** Generates concise summaries of the articles.
-- **Comparative Analysis:** Compares sentiments across multiple articles for deeper insights.
-- **Text-to-Speech (TTS):** Converts summarized text into Hindi audio.
-- **User-Friendly Interface:** Built with Streamlit for easy interaction.
-- **API Development:** Backend developed using FastAPI for seamless data processing.
+## 2. Key Features
+- **Automated News Retrieval:** Gathers the latest articles based on the input company name.  
+- **Summarization Engine:** Extracts essential information using NLP-based models.  
+- **Sentiment Assessment:** Classifies news as positive, negative, or neutral.  
+- **Trend Analysis:** Compares sentiment across multiple articles.  
+- **Stock Forecasting:** Predicts potential stock movement based on sentiment scores.  
+- **Hindi TTS Conversion:** Converts summarized news into Hindi speech.  
+- **Interactive UI:** Developed using Streamlit for seamless user experience.  
+- **API-First Design:** Enables integration with external applications.  
+- **Cloud Deployment:** Hosted on Hugging Face Spaces for easy access.  
 
-## Tech Stack
+## 3. Project Setup
+Follow these steps to install and run the application.
 
-### **Backend Framework**
-- FastAPI
-- Uvicorn (ASGI server)
+### 3.1 Prerequisites
+Ensure you have the following installed:
+- Python 3.9+
+- pip (Python package manager)
+- Virtual Environment (venv)
 
-### **Programming Language**
-- Python
-
-### **Machine Learning & NLP Libraries**
-- Transformers (Hugging Face)
-- VaderSentiment
-- KeyBERT
-- LangDetect
-- Summarization Pipeline (Facebook BART)
-
-### **Web Scraping & News Fetching**
-- Feedparser
-
-### **Frontend Framework**
-- Streamlit
-
-### **Data Visualization**
-- Plotly Express
-- Matplotlib
-- Pandas
-
-### **Audio Generation**
-- gTTS (Google Text-to-Speech)
-- Google Translator
-
-### **Additional Libraries**
-- Requests (HTTP requests)
-- Base64 (encoding/decoding)
-- Threading
-- Re (Regular Expressions)
-
-### **Deployment & Hosting**
-- Hosted on Hugging Face Spaces: [News Sentiment Analysis](https://srirag12-news-sentiment-analysis.hf.space/)
-- Local development supported
-
-### **Caching**
-- In-memory dictionary-based caching
-
-### **Middleware**
-- CORS middleware (FastAPI)
-
-## Installation & Setup
-
-### **Prerequisites**
-- Python 3.8+
-- Required libraries (installed via `requirements.txt`)
-
-### **Steps to Run Locally**
-1. **Clone the Repository**
+### 3.2 Installation Steps
+1. **Clone the repository:**  
    ```bash
-   git clone <GitHub-repo-link>
-   cd News-Sentiment-Analysis
+   git clone https://github.com/Srirag2004/news-sentiment-analysis.git
+   cd news-sentiment-analysis
    ```
-2. **Install Dependencies**
+2. **Create and Activate a Virtual Environment:**  
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # On macOS/Linux
+   venv\Scripts\activate     # On Windows
+   ```
+3. **Install Required Dependencies:**  
    ```bash
    pip install -r requirements.txt
    ```
-3. **Run the Application**
+4. **Run the FastAPI Server:**  
    ```bash
-   streamlit run app.py
+   uvicorn backend:app --host 0.0.0.0 --port 8000 --reload
    ```
+5. **Access the API Documentation:**  
+   - Swagger UI: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)  
+   - Redoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)  
 
-## API Development
+## 4. Model Details
+### 4.1 Summarization Model
+- Uses **NLP-based models** to extract essential information from news articles.
+- Provides concise and relevant summaries for easy consumption.
 
-### **API Endpoints**
-- `/fetch_news`: Fetches and extracts news articles.
-- `/analyze_sentiment`: Performs sentiment analysis.
-- `/compare_sentiment`: Conducts comparative analysis.
-- `/generate_tts`: Converts summarized text to Hindi speech.
+### 4.2 Sentiment Analysis Model
+- Utilizes **TextBlob** and **RoBERTa** to determine sentiment polarity.
+- Classifies news into **positive, negative, or neutral** categories.
+- Outputs confidence scores for each classification.
 
-### **API Usage**
-- APIs can be accessed via Postman or any REST client.
-- Example request using `curl`:
-  ```bash
-  curl -X POST "https://srirag12-news-api.hf.space/news?company=name" -d '{"name": "Tesla"}' -H "Content-Type: application/json"
-  ```
+### 4.3 Text-to-Speech (TTS) Model
+- Uses **gTTS (Google Text-to-Speech)** for converting summarized news into Hindi speech.
+- Enhances accessibility by providing an audio version of news summaries.
+
+## 5. API Development
+### 5.1 Endpoints & Usage
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/fetch-news` | GET | Extracts news articles from sources |
+| `/summarize` | POST | Summarizes the extracted news |
+| `/analyze-sentiment` | POST | Provides sentiment analysis results |
+| `/text_to_speech` | POST | Converts news into an audio file |
+
+### 5.2 Accessing APIs via Postman
+1. Open Postman.
+2. Set the Base URL: `https://srirag12-news-api.hf.space/news?company=comapanyname`
+3. Choose the relevant endpoint (GET or POST).
+4. For POST requests, pass the JSON payload in the request body.
+5. Click Send to receive the response.
+
 ### **Expected Output**
 ```{
     "Company": "tesla",
@@ -339,28 +322,39 @@ This project is a web-based application that extracts news articles related to a
 }
 ```
 
-## Model Details
+## 6. API Usage (Third-Party Integrations)
+### 6.1 RSS Feed Parsing (`feedparser`)
+- **Purpose:** Extracts news articles from sources like CNN, BBC, etc.
+- **Library Used:** `feedparser`
+- **Integration:** Used in `news_scraper.py` to fetch real-time news.
 
-- **Summarization:** Facebook BART model (Hugging Face Transformers)
-- **Sentiment Analysis:** VADER & DistilBERT
-- **TTS:** Google Text-to-Speech (gTTS) for Hindi
+### 6.2 Language Detection (`langdetect`)
+- **Purpose:** Detects the language of an article before processing.
+- **Library Used:** `langdetect`
+- **Integration:** Helps filter out unsupported languages.
 
-## Assumptions & Limitations
+## 7. Assumptions & Limitations
+### 7.1 Assumptions
+- All news articles are well-formatted and in English.
+- Sentiment analysis works accurately for general news content.
+- The summarization model provides concise yet informative outputs.
+- The TTS model accurately converts text to Hindi speech.
 
-- Only non-JavaScript-based news websites are scraped.
-- Sentiment analysis accuracy depends on the dataset used.
-- TTS output is currently limited to Hindi.
+### 7.2 Limitations
+- Sentiment analysis might not be 100% accurate for financial news due to nuanced language.
+- Stock movement predictions are based purely on sentiment and do not factor in external financial indicators.
+- TTS is limited to Hindi and may need enhancements for better pronunciation.
 
-## Contribution Guidelines
-- Fork the repository and create a feature branch.
-- Follow PEP8 coding standards.
-- Provide proper documentation in the code.
-- Submit a pull request with a detailed description.
+## 8. Conclusion & Future Scope
+This project simplifies real-time financial news tracking and sentiment-based stock forecasting. By integrating AI-powered NLP, sentiment analysis, and Hindi TTS, the application provides users with valuable insights for informed decision-making.
 
-## License
-This project is licensed under the MIT License.
+### Future Enhancements:
+- Support for multiple languages in TTS.
+- Integration with additional financial APIs for stock data validation.
+- Enhanced deep learning models for better sentiment accuracy.
 
-## Acknowledgements
-- Hugging Face for NLP models.
-- Streamlit for UI development.
-- Open-source TTS models for speech synthesis.
+## 9. Deployment & Resources
+- **Deployment Link:** [Hugging Face Spaces](https://huggingface.co/spaces/srirag12/news-sentiment-analysis)
+- **GitHub Repository:** [GitHub](https://github.com/Srirag2004/news-sentiment-analysis)
+- **License:** MIT
+- **Contributors:** Srirag Punnamaraju
