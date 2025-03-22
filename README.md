@@ -43,10 +43,7 @@ Ensure you have the following installed:
    ```bash
    uvicorn backend:app --host 0.0.0.0 --port 8000 --reload
    ```
-5. **Access the API Documentation:**  
-   - Swagger UI: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)  
-   - Redoc: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)  
-
+   
 ## 4. Model Details
 ### 4.1 Summarization Model
 - Uses **NLP-based models** to extract essential information from news articles.
