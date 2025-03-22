@@ -67,12 +67,14 @@ Ensure you have the following installed:
 | `/analyze-sentiment` | POST | Provides sentiment analysis results |
 | `/text_to_speech` | POST | Converts news into an audio file |
 
-### 5.2 Accessing APIs via Postman
-1. Open Postman.
-2. Set the Base URL: `https://srirag12-news-api.hf.space/news?company=comapanyname`
-3. Choose the relevant endpoint (GET or POST).
-4. For POST requests, pass the JSON payload in the request body.
-5. Click Send to receive the response.
+### Accessing APIs
+
+APIs can be tested using Postman or cURL.
+
+Example request:
+```bash
+curl -X GET "https://srirag12-news-api.hf.space/news?company=companyname" -H "Content-Type: application/json"
+```
 
 ### **Expected Output**
 ```{
